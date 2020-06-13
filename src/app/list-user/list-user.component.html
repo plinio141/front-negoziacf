@@ -1,0 +1,74 @@
+<div fxFlex="100" class="content">
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+        <h2>Usuarios</h2>
+        <div>
+            <button mat-fab color="accent" aria-label="Crear usuario" (click)="addUser()">
+              <mat-icon>add</mat-icon>
+            </button>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+        <mat-form-field fxFlex="90">
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Buscar">
+        </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-around center" >
+        <div fxFlex="90">
+            <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                <!-- firstName Column -->
+                <ng-container matColumnDef="firstName">
+                  <mat-header-cell *matHeaderCellDef> Nombres </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
+                </ng-container>
+              
+                <!-- lastName Column -->
+                <ng-container matColumnDef="lastName">
+                  <mat-header-cell *matHeaderCellDef> Apellidos </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+                </ng-container>
+              
+                <!-- email Column -->
+                <ng-container matColumnDef="email">
+                  <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+                </ng-container>
+              
+                <!-- phone Column -->
+                <ng-container matColumnDef="phone">
+                  <mat-header-cell *matHeaderCellDef> Teléfono </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.phone}} </mat-cell>
+                </ng-container>
+    
+                <!-- phoneType Column -->
+                <ng-container matColumnDef="phoneType">
+                    <mat-header-cell *matHeaderCellDef> Tipo de teléfono </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                      {{getPhoneType(element)}}
+                    </mat-cell>
+                </ng-container>
+                
+                <!-- sex Column -->
+                <ng-container matColumnDef="sex">
+                    <mat-header-cell *matHeaderCellDef> Sexo </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                      {{getGender(element)}}
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Editar Column -->
+                <ng-container matColumnDef="edit">
+                  <mat-header-cell *matHeaderCellDef>Editar</mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <button mat-fab color="primary" aria-label="Editar" (click)="editUser(element)">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                  </mat-cell>
+              </ng-container>
+              
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+        </div>
+    </div>
+</div>
